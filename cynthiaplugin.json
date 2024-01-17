@@ -1,0 +1,10 @@
+{
+  "CyntiaPluginCompat": "2",
+  "runners": {
+    "pluginChildExecute": {
+      "type": "js",
+      "execute": "[ \"index.js\", \"serve\", \"8333\" ]"
+    },
+    "proxied": [["http://localhost:8333/", "dash"]]
+  }
+}
