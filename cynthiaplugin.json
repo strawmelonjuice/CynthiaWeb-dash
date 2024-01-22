@@ -3,7 +3,7 @@
   "runners": {
     "pluginChildExecute": {
       "type": "js",
-      "execute": "[ \"dist/index.js\", \"serve\"]"
+      "execute": "[ \"dist/index.js\", \"serve\" ]"
     }
   }
 }
