@@ -87,7 +87,7 @@ config.json
 # Next.js build output
 .next
 out
-static/css/style.css
+generated/css/style.css
 
 # Nuxt.js build / generate output
 .nuxt

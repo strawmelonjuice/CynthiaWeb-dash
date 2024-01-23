@@ -7,9 +7,9 @@
     "build": "npm run build:ts && npm run build:css",
     "prepack": "npm run build",
     "start": "echo \"This plugin should be ran from inside Cynthia!\"",
-    "dev": "concurrently \"postcss --watch src/tailwind.css -o static/css/style.css\" \"npx tsc --watch\" \"nodemon -q dist/index.js serve\"",
+    "dev": "concurrently \"postcss --watch src/tailwind.css -o generated/css/style.css\" \"npx tsc --watch\" \"nodemon --watch ./dist/* -q dist/index.js -- serve\"",
     "build:ts": "npx tsc",
-    "build:css": "postcss src/tailwind.css -o static/css/style.css"
+    "build:css": "postcss src/tailwind.css -o generated/css/style.css"
   },
   "author": "MLC Bloeiman",
   "license": "MIT",
