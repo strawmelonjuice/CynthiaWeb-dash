@@ -27,7 +27,7 @@ const sessionoptions: session.SessionOptions = {
 };
 if (config.production) {
 	app.set("trust proxy", 1);
-	// @ts-ignore
+	// @ts-expect-error
 	sessionoptions.cookie.secure = true;
 }
 app.use(session(sessionoptions));
@@ -44,7 +44,10 @@ switch (process.argv[2]) {
 				}
 			});
 			app.use("/assets", express.static(path.join(__dirname, "../assets")));
-			app.use("/generated", express.static(path.join(__dirname, "../generated")));
+			app.use(
+				"/generated",
+				express.static(path.join(__dirname, "../generated")),
+			);
 			app.use(
 				"/jquery",
 				express.static(
@@ -69,4 +72,3 @@ switch (process.argv[2]) {
 		}
 		break;
 }
-
