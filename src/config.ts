@@ -32,10 +32,7 @@ let config = {
 const configfile = path.join(__dirname, "../config.json");
 if (fs.existsSync(configfile)) {
     const t = fs.readFileSync(configfile, "utf8");
-    if (typeof t !== "string") {
-        console.error("Config file is unreadable");
-        process.exit(1);
-    }
+
     tell.info(
         `config.json file found! Loading config: \n ${((a) => {
             let b = JSON.parse(a);
