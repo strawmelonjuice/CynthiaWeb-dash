@@ -9,7 +9,7 @@ export interface Request {
 }
 
 
-export type listedFileObject = Array<PostPageObject>;
+export type PublishedFileObject = Array<PostPageObject>;
 
 export interface CynthiaCacheIndexObject {
     fileid: string,

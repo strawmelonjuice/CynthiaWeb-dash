@@ -5,8 +5,8 @@ import fs from "fs";
 import chalk from "chalk";
 
 import {publishedfile} from "./cynthia-communicate";
-
-console.log(publishedfile.get());
+//
+//console.log(publishedfile.get());
 
 const pkgself = (() => {
     const t = fs.readFileSync(path.join(__dirname, "../package.json"), "utf8");
