@@ -34,6 +34,8 @@ function authtry() {
         }
     }
 
+// timeout to allow spinner to show up
+
     setTimeout(() => {
         axios.post('/api/auth', {
             username: document.forms["login"]["username"].value,
