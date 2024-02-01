@@ -1,35 +1,32 @@
 let GeneralSiteInfo;
 
 function pullpoll() {
-    $.ajax({
-        type: "GET",
-        url: "/api/GeneralSiteInfoPoll",
-        data: "",
-        success: (data) => {
-            GeneralSiteInfo = data;
+    axios.get("/api/GeneralSiteInfoPoll")
+        .then(function (response) {
+            GeneralSiteInfo = response.data;
+            GeneralSiteInfo.client = {}
             putpoll();
-        },
-        contentType: "application/json",
-        dataType: "json",
-    });
+        })
+        .catch((error) => {
+            console.error(error);
+        })
 }
+
 
 pullpoll()
 setInterval(pullpoll, 30000);
-
-function putpoll() {
-    for (const a of (document.getElementsByClassName("refertohomesite"))) {
-        a.setAttribute("href", GeneralSiteInfo.parentnodeadress);
-    }
-    {
-        const f = document.getElementById("userimg");
-        if (f !== undefined) {
-            f.setAttribute("alt", GeneralSiteInfo.username)
+window.pollers = [
+    () => {
+        for (const a of (document.getElementsByClassName("refertohomesite"))) {
+            a.setAttribute("href", GeneralSiteInfo.parentnodeadress);
         }
     }
-    for (const a of (document.getElementsByClassName("settodisplayname"))) {
-        a.innerText = GeneralSiteInfo.displayname;
-    }
+]
+
+function putpoll() {
+    pollers.forEach((o) => {
+        o();
+    })
 }
 
 setInterval(putpoll, 100);

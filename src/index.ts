@@ -13,7 +13,7 @@ const pkgself = (() => {
     return JSON.parse(t);
 })();
 import config from "./config";
-import {tell} from "./logging";
+import {panic, tell} from "./logging";
 import express from "express";
 import * as page from "./page";
 import {authpage, secure} from "./access";
@@ -51,16 +51,15 @@ switch (process.argv[2]) {
             "/generated",
             express.static(path.join(__dirname, "../generated")),
         );
-        app.use(
-            "/jquery",
-            express.static(
-                path.join(__dirname, "../node_modules/jquery/dist/jquery.min.js"),
-            ),
-        );
-        app.use(
-            "/axios",
-            express.static(path.join(__dirname, "../node_modules/axios/dist/")),
-        );
+        {
+            if (!fs.existsSync(path.join(__dirname, "../node_modules/axios/dist/axios.js"))) {
+                panic("Could not find dependency: Axios is missing.");
+            }
+            app.use(
+                "/axios",
+                express.static(path.join(__dirname, "../node_modules/axios/dist/")),
+            );
+        }
         app.use(express.json());
         app.get("/api/*", apis.get);
         app.get("/dashboard-fetch/*", page.dashes);

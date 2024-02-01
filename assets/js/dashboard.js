@@ -1,33 +1,52 @@
 function switchpages(to) {
-    const navbutton= {
-        dashboard: {mobile: document.getElementById("mobile-dashboard-nav"), desktop: document.getElementById("dashboard-nav"), location: "dashboard"},
-        pages: {mobile: document.getElementById("mobile-pages-nav"), desktop: document.getElementById("pages-nav"), location: "pages"},
-        plugins: {mobile: document.getElementById("mobile-plugins-nav"), desktop: document.getElementById("plugins-nav"), location: "plugins"},
-        customisation: {mobile: document.getElementById("mobile-customisation-nav"), desktop: document.getElementById("customisation-nav"), location: "customisation"},
+    const navbutton = {
+        dashboard: {
+            mobile: document.getElementById("mobile-dashboard-nav"),
+            desktop: document.getElementById("dashboard-nav"),
+            location: "dashboard"
+        },
+        pages: {
+            mobile: document.getElementById("mobile-pages-nav"),
+            desktop: document.getElementById("pages-nav"),
+            location: "pages"
+        },
+        plugins: {
+            mobile: document.getElementById("mobile-plugins-nav"),
+            desktop: document.getElementById("plugins-nav"),
+            location: "plugins"
+        },
+        customisation: {
+            mobile: document.getElementById("mobile-customisation-nav"),
+            desktop: document.getElementById("customisation-nav"),
+            location: "customisation"
+        },
     };
     for (const d in navbutton) {
         const a = navbutton[d];
-        for (const h of [a.mobile, a.desktop]) {h.setAttribute("onclick", `switchpages("${d}")`);}
+        for (const h of [a.mobile, a.desktop]) {
+            h.setAttribute("onclick", `switchpages("${d}")`);
+        }
         if (d === to) {
-            a.mobile.setAttribute("class","bg-red-400 dark:bg-red-900 text-white block rounded-md px-3 py-2 text-base font-medium");
+            a.mobile.setAttribute("class", "bg-red-400 dark:bg-red-900 text-white block rounded-md px-3 py-2 text-base font-medium");
             a.desktop.setAttribute("class", "bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium");
             a.ariaCurrent = "page";
             axios.get('/dashboard-fetch/' + a.location)
-  .then(function (response) {
-      document.querySelector("main").innerHTML = response.data;
-  })
-  .catch(function (error) {
-      document.querySelector("main").innerText = "There was an error loading this page."
-      console.error(error);
-  });
-            
+                .then(function (response) {
+                    document.querySelector("main").innerHTML = response.data;
+                })
+                .catch(function (error) {
+                    document.querySelector("main").innerText = "There was an error loading this page."
+                    console.error(error);
+                });
+
         } else {
-            a.mobile.setAttribute("class","text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium");
+            a.mobile.setAttribute("class", "text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium");
             a.desktop.setAttribute("class", "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium");
             a.ariaCurrent = "page";
         }
     }
 }
+
 switchpages("dashboard");
 
 function mobileMenuToggle() {
@@ -57,3 +76,15 @@ function userMenuToggle() {
 
 userMenuToggle();
 (document.getElementById("user-menu-button")).setAttribute("onClick", "userMenuToggle()");
+
+window.pollers.push(() => {
+    {
+        const f = document.getElementById("userimg");
+        if (f == null || f !== undefined) {
+            f.setAttribute("alt", GeneralSiteInfo.username)
+        }
+    }
+    for (const a of (document.getElementsByClassName("settodisplayname"))) {
+        a.innerText = GeneralSiteInfo.displayname;
+    }
+})
