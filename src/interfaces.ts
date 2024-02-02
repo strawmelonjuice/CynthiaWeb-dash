@@ -32,11 +32,11 @@ export interface CynthiaUrlDataF {
     fullurl: string,
 }
 
-type CynthiaModeObject = [String, ModeConfig];
+type CynthiaModeObject = [string, ModeConfig];
 
 export interface ModeConfig {
     sitename: string,
-    favicon?: String,
+    favicon?: string,
     stylefile: string,
     handlebar: Handlebar,
     menulinks: Array<Menulink>,
@@ -70,21 +70,19 @@ export interface Menulist {
 
 export interface CynthiaContentMetaData {
     author?: Author,
-    category?: String,
+    category?: string,
     content
         :
         CynthiaPostDataContentObject,
     dates?: Dates,
     id: string,
-    kind
-        :
-        string,
-    mode?: String,
+    type: string,
+    mode?: string,
     pageinfooverride?: boolean,
     postlist?: Postlist,
-    short?: String,
-    tags: Array<String>,
-    thumbnail?: String,
+    short?: string,
+    tags: Array<string>,
+    thumbnail?: string,
     title: string,
 }
 
@@ -94,7 +92,7 @@ export type PostPageObject =
 
 export interface Author {
     name: string,
-    thumbnail?: String,
+    thumbnail?: string,
 }
 
 export interface CynthiaPostDataContentObject {
@@ -113,7 +111,7 @@ export interface Postlist {
 }
 
 export interface PostListFilter {
-    category?: String,
-    tag?: String,
-    searchline?: String,
+    category?: string,
+    tag?: string,
+    searchline?: string,
 }

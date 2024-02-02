@@ -34,11 +34,10 @@ if (fs.existsSync(configfile)) {
     const t = fs.readFileSync(configfile, "utf8");
 
     tell.info(
-        `config.json file found! Loading config: \n ${((a) => {
+        `config.json file found! Loading config${((a) => {
             let b = JSON.parse(a);
-            if (b.production === false) return a;
-            b.users = [];
-            return JSON.stringify(b);
+            if (b.verbose === true) return (": \n" + JSON.stringify(b));
+            return "...";
         })(t)}`,
     );
     config = JSON.parse(t);

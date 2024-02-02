@@ -14,7 +14,7 @@ const stripAnsiCodes = (str: string) =>
 class logging {
     logfile: string;
 
-    constructor(logfile: sftring) {
+    constructor(logfile: string) {
         this.logfile = logfile;
         this.info(`🖊 Logging to "${logfilename}".`);
     }

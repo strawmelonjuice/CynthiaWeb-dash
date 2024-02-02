@@ -31,7 +31,6 @@ const sessionoptions: session.SessionOptions = {
 };
 if (config.production) {
     app.set("trust proxy", 1);
-    // @ts-expect-error
     sessionoptions.cookie.secure = true;
 }
 app.use(session(sessionoptions));
