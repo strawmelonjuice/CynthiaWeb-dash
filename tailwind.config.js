@@ -4,6 +4,7 @@ module.exports = {
         "./dist/web/**/*.js",
         "./assets/**/*.{html,js,css,handlebars,svg}",
         "./web/**/*.{html,js,css,handlebars}",
+        "./dist/pag*.js"
     ],
     darkMode: "media", // or 'class'
     theme: {

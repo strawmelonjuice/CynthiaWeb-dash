@@ -28,12 +28,11 @@ export function dashes(req: e.Request, res: e.Response) {
         ),
         "pages": (() => {
                 const hb = Handlebars.compile(fs.readFileSync(
-                    path.join(__dirname, "../assets/html/y2.handlebars"),
+                    path.join(__dirname, "../assets/html/dashboard-pages.handlebars"),
                     "utf8",
                 ));
                 let publicationList = "";
                 for (const publication of publishedfile.get()) {
-                    const editlink = "";
                     const svg = fs.readFileSync(
                         path.join(__dirname, "../assets/svg/cynthia_tbg.svg"),
                         "utf8",
@@ -43,18 +42,20 @@ export function dashes(req: e.Request, res: e.Response) {
                         }
                         return publication.title;
                     })());
-                    const bgcolor = (() => {
+                    const kindinfo = (() => {
                         switch (publication.type) {
                             case "post":
-                                return "bg-rose-600";
+                                return ["Post", "bg-rose-600"];
                             case "page":
-                                return "bg-orange-700";
+                                return ["Page", "bg-orange-700"];
                             default:
-                                return "bg-emerald-600";
+                                return ["Post list", "bg-emerald-600"];
                         }
                     })();
-                    publicationList = publicationList + `<div class="w-full border-amber-600 border-opacity-100 ${bgcolor} p-4 text-blue-200 ring-rose-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-opacity-50">${svg}
-                <a href="${editlink}"><button class="font-bold;">${publication.title}</button></a></div>`;
+                    publicationList = publicationList + `<div onclick="window.location.assign('#pages-editor?id=${publication.id}')" class="cursor-pointer w-full border-amber-600 border-opacity-100 ${kindinfo[1]} p-4 text-blue-200 ring-rose-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-opacity-50">
+                    <button class="font-bold bg-stone-400 bg-opacity-50 w-full pt-2 pb-0.5 rounded-t-lg">${kindinfo[0]}</button>
+                    ${svg}
+                <button class="font-bold bg-stone-400 bg-opacity-50 w-full pb-6 rounded-b-lg">${publication.title}</button></div>`;
                 }
                 return hb({
                     publicationList
@@ -62,6 +63,9 @@ export function dashes(req: e.Request, res: e.Response) {
             }
         )
         (),
+        "pages-editor": (() => {
+            return `Hi, this will one day be an editor! <span id="whatamiediting"></span>`;
+        })(),
         "plugins":
             fs.readFileSync(
                 path.join(__dirname, "../assets/html/y3.html"),

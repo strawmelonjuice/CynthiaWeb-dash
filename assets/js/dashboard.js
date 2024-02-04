@@ -1,30 +1,60 @@
-function switchpages(to) {
+function switchpages(toPageName) {
+//    console.log("To: " + toPageName)
+    let to = toPageName;
+    if (toPageName === "") to = "dashboard";
     const navbutton = {
         dashboard: {
             mobile: document.getElementById("mobile-dashboard-nav"),
             desktop: document.getElementById("dashboard-nav"),
-            location: "dashboard"
+            location: "dashboard", navigator: true
         },
         pages: {
             mobile: document.getElementById("mobile-pages-nav"),
             desktop: document.getElementById("pages-nav"),
-            location: "pages"
+            location: "pages",
+            navigator: true
+        },
+        "pages-editor": {
+            mobile: document.getElementById("mobile-pages-nav"),
+            desktop: document.getElementById("pages-nav"),
+            location: "pages-editor",
+            navigator: false
+            , f: () => {
+                const g = document.getElementById("whatamiediting");
+                if ((getParams()["new"]) !== undefined) {
+                    g.innerText = "Creating a new publication!";
+                    return;
+                }
+                if ((getParams()["id"]) === undefined) {
+                    g.innerText = "... with nothing open.";
+                    return;
+                }
+                if ((getParams()["id"]) !== undefined) {
+                    g.innerHTML = `Editing <i><b>${getParams()["id"]}</b></i>!`;
+                    return;
+                }
+            }
         },
         plugins: {
             mobile: document.getElementById("mobile-plugins-nav"),
             desktop: document.getElementById("plugins-nav"),
-            location: "plugins"
+            location: "plugins", navigator: true
+
         },
         customisation: {
             mobile: document.getElementById("mobile-customisation-nav"),
             desktop: document.getElementById("customisation-nav"),
             location: "customisation"
+            , navigator: true
+
         },
     };
     for (const d in navbutton) {
         const a = navbutton[d];
-        for (const h of [a.mobile, a.desktop]) {
-            h.setAttribute("onclick", `switchpages("${d}")`);
+        if (a.navigator) {
+            for (const h of [a.mobile, a.desktop]) {
+                h.setAttribute("onclick", `switchpages("${d}")`);
+            }
         }
         if (d === to) {
             a.mobile.setAttribute("class", "bg-red-400 dark:bg-red-900 text-white block rounded-md px-3 py-2 text-base font-medium");
@@ -33,21 +63,41 @@ function switchpages(to) {
             axios.get('/dashboard-fetch/' + a.location)
                 .then(function (response) {
                     document.querySelector("main").innerHTML = response.data;
+                    if (window.location.hash == "") window.location.hash = to; else {
+                        window.location.hash = window.location.hash.replace(window.location.hash.split("?")[0], to)
+                    }
+                    window.displayedPage = to;
+                    if (a.f !== undefined) {
+                        a.f();
+                    }
                 })
                 .catch(function (error) {
                     document.querySelector("main").innerText = "There was an error loading this page."
                     console.error(error);
                 });
-
         } else {
-            a.mobile.setAttribute("class", "text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium");
-            a.desktop.setAttribute("class", "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium");
-            a.ariaCurrent = "page";
+            if (a.navigator) {
+                a.mobile.setAttribute("class", "text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium");
+                a.desktop.setAttribute("class", "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium");
+                a.ariaCurrent = "none";
+            }
         }
     }
 }
 
-switchpages("dashboard");
+
+function hashIsolated() {
+    if (window.location.hash === "") return "";
+    return window.location.hash.split("#")[1].split("?")[0];
+}
+
+setInterval(function () {
+    if (window.displayedPage === undefined || ((hashIsolated() !== (window.displayedPage)))) {
+        console.log("Automatically switching this page up.");
+        switchpages(hashIsolated());
+    }
+}, 100)
+
 
 function mobileMenuToggle() {
     const mobilemenu = document.getElementById("mobile-menu");

@@ -30,3 +30,15 @@ function putpoll() {
 }
 
 setInterval(putpoll, 100);
+
+function getParams() {
+    let s = {};
+    if (window.location.hash.split("?")[1] === undefined) return s;
+    const o = window.location.hash.split("?")[1].split("&");
+    for (const x of o) {
+        const p = x.split("=");
+        const q = p[0];
+        s[q] = p[1];
+    }
+    return s;
+}
