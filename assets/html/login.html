@@ -1,83 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns="http://www.w3.org/1999/html">
-<head>
+  <head>
     <link
-        rel="stylesheet"
-        href="/generated/css/style.css"
-        content-type="text/css"
-        charset="utf-8"
+      rel="stylesheet"
+      href="/generated/css/style.css"
+      content-type="text/css"
+      charset="utf-8"
     />
     <title>CynthiaDash - Login</title>
-    <link rel="icon" type="image/png" href="/assets/png/cynthia.png"/>
-</head>
+    <link rel="icon" type="image/png" href="/assets/png/cynthia.png" />
+  </head>
 
-<body class="bg-stone-300 dark:bg-zinc-800">
-<img
-    src="/assets/svg/cynthia.svg"
-    class="absolute top-5 right-5 h-20 w-20 border rounded-md border-amber-600 dark:bg-stone-100 bg-opacity-60"
-/>
-<div
-    class="grid h-screen place-items-center ring-offset-rose-950 text-fuchsia-900 leading-snug"
->
-    <form
+  <body class="bg-stone-300 dark:bg-zinc-800">
+    <img
+      src="/assets/svg/cynthia.svg"
+      class="absolute top-5 right-5 h-20 w-20 border rounded-md border-amber-600 dark:bg-stone-100 bg-opacity-60"
+    />
+    <div
+      class="grid h-screen place-items-center ring-offset-rose-950 text-fuchsia-900 leading-snug"
+    >
+      <form
         name="login"
         class="w-5/12 self-center ring-offset-rose-950 text-fuchsia-900"
         onsubmit="authtry()"
         action="javascript:void(0);"
-    >
+      >
         <div class="mb-4">
-            <label
-                for="username"
-                class="block text-fuchsia-900 dark:text-violet-200 text-sm font-semibold mb-2"
+          <label
+            for="username"
+            class="block text-fuchsia-900 dark:text-violet-200 text-sm font-semibold mb-2"
             >Username</label
-            >
-            <input
-                type="text"
-                id="username"
-                class="form-input w-full px-4 py-2 border rounded-lg text-fuchsia-900 focus:ring-blue-500"
-                required
-                placeholder="strawberrygrapes233"
-            />
+          >
+          <input
+            type="text"
+            id="username"
+            class="form-input w-full px-4 py-2 border rounded-lg text-fuchsia-900 focus:ring-blue-500"
+            required
+            placeholder="strawberrygrapes233"
+          />
         </div>
         <div class="mb-6">
-            <label
-                for="password"
-                class="block text-fuchsia-900 dark:text-violet-200 text-sm font-semibold mb-2"
+          <label
+            for="password"
+            class="block text-fuchsia-900 dark:text-violet-200 text-sm font-semibold mb-2"
             >Password</label
-            >
-            <input
-                type="password"
-                id="password"
-                class="form-input w-full px-4 py-2 border rounded-lg text-fuchsia-900 focus:ring-blue-500"
-                required
-                placeholder="••••••••••••"
-            />
-            <p class="text-fuchsia-800 dark:text-violet-100 text-xs mt-1">
-                Log in with a password as set in <code>config.json</code>!
-            </p>
+          >
+          <input
+            type="password"
+            id="password"
+            class="form-input w-full px-4 py-2 border rounded-lg text-fuchsia-900 focus:ring-blue-500"
+            required
+            placeholder="••••••••••••"
+          />
+          <div class="form-group">
+            <input type="checkbox" name="autologin" value="1" />
+            <label for="autologin">
+              Stay logged in
+              <small style="font-size: 8px"
+                >Let cookies do the job for you</small
+              ></label
+            ><br />
+          </div>
+
+          <p class="text-fuchsia-800 dark:text-violet-100 text-xs mt-1">
+            Log in with a password as set in <code>config.json</code>!
+          </p>
         </div>
         <button
-            type="submit"
-            id="submitbutton"
-            class="place-items-center grid content-center w-full border-amber-600 border-opacity-100 bg-orange-700 p-4 text-blue-200 ring-rose-300 px-4 py-2 rounded-lg hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-opacity-50"
+          type="submit"
+          id="submitbutton"
+          class="place-items-center grid content-center w-full border-amber-600 border-opacity-100 bg-orange-700 p-4 text-blue-200 ring-rose-300 px-4 py-2 rounded-lg hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-opacity-50"
         >
-            Authorize
+          Authorize
         </button>
         <p
-            class="text-fuchsia-800 dark:text-violet-100 text-xs text-center mt-4"
+          class="text-fuchsia-800 dark:text-violet-100 text-xs text-center mt-4"
         >
           <span id="Aaa1"
-          >This site is served through Cynthia, this portal through
+            >This site is served through Cynthia, this portal through
             Cynthia-Dash.</span
           >
-            <a href="#" class="text-blue-500 hover:underline refertohomesite"
+          <a href="#" class="text-blue-500 hover:underline refertohomesite"
             >Back to site</a
-            >.
+          >.
         </p>
-    </form>
-    <script src="/axios/axios.min.js"></script>
-    <script src="/assets/js/login.js"></script>
-    <script src="/assets/js/sitewide.js"></script>
-</div>
-</body>
+      </form>
+      <script src="/axios/axios.min.js"></script>
+      <script src="/assets/js/login.js"></script>
+      <script src="/assets/js/sitewide.js"></script>
+    </div>
+  </body>
 </html>

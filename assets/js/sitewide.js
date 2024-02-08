@@ -29,7 +29,9 @@ function putpoll() {
     })
 }
 
-setInterval(putpoll, 100);
+setTimeout(function () {
+    setInterval(putpoll);
+}, 80)
 
 function getParams() {
     let s = {};

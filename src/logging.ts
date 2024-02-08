@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import tslog from "tslog";
+// import tslog from "tslog";
 import chalk from "chalk";
 
 const verbose = require("./config").verbose;
@@ -23,7 +23,7 @@ class logging {
         fs.writeFileSync(
             this.logfile,
             `\n[${cat} ${new Date().toLocaleTimeString()}] ${msg}`,
-            {flag: "a"},
+            { flag: "a" },
         );
     }
 
@@ -86,9 +86,10 @@ let starttime: Date;
 if (!fs.existsSync("./logs")) {
     fs.mkdirSync("./logs");
 }
-let lt;
-if (verbose) lt = new tslog.Logger();
-else lt = new logging(logfilename);
+// let lt;
+// if (verbose) lt = new tslog.Logger();
+// else lt = new logging(logfilename);
+const lt = new logging(logfilename)
 export const tell = lt;
 if (verbose) {
     tell.info("Verbose logging is ON.");

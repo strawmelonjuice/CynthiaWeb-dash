@@ -1,0 +1,19 @@
+<div class="grid place-items-center ring-offset-rose-950 text-fuchsia-900 dark:text-violet-200">
+    <h1 class="mt-6 font-display text-4xl tracking-tight w-fit">Welcome, <span
+            class="settodisplayname bg-orange-700 bg-opacity-40 italic p-1 rounded-md">unset</span>!</h1>
+    
+</div>
+<div class="p-6 m-10 text-fuchsia-900 dark:text-violet-200 bg-stone-100 border-2 border border-amber-600 dark:bg-stone-600 bg-opacity-60 shadow-md rounded-xl bg-clip-border mt-20 w-fit">
+        <span class="underline underline-offset-3 decoration-4 decoration-amber-600 dark:decoration-amber-600 text-2xl mb-6 font-display">Your publications</span>
+    <div class="block">
+        <ul class="list-disc list-inside">
+            <li>Total number of publications: <span class="text-transparent bg-clip-text bg-gradient-to-r to-violet-700 from-rose-400 font-semibold">{{stats.publications.total}}</span>
+                <ul class="list-disc list-inside pl-4">
+                    <li>Pages: <span class="text-transparent bg-clip-text bg-gradient-to-r to-violet-700 from-rose-400 font-semibold">{{stats.publications.pages}}</span></li>
+                    <li>Posts: <span class="text-transparent bg-clip-text bg-gradient-to-r to-violet-700 from-rose-400 font-semibold">{{stats.publications.posts}}</span></li>
+                    <li>Postlists: <span class="text-transparent bg-clip-text bg-gradient-to-r to-violet-700 from-rose-400 font-semibold">{{stats.publications.postlists}}</span></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
