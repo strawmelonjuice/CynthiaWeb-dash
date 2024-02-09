@@ -310,16 +310,18 @@ module.exports = {
         },
         fontFamily: {
             sans: [
+                "Raleway",
                 "Ubuntu",
-                "ui-sans-serif",
-                "system-ui",
-                "sans-serif",
+//                "ui-sans-serif",
+//                "system-ui",
+//                "sans-serif",
                 '"Apple Color Emoji"',
                 '"Segoe UI Emoji"',
                 '"Segoe UI Symbol"',
                 '"Noto Color Emoji"',
             ],
             serif: [
+                "Raleway",
                 "Ubuntu",
                 "ui-serif",
                 "Georgia",
