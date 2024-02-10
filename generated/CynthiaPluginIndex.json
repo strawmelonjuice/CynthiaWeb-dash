@@ -1,0 +1,42 @@
+[
+  {
+    "id": "emoji",
+    "host": "NPM",
+    "referrer": "@cynthiacms/emoji",
+    "thumbnail": "https://raw.githubusercontent.com/strawmelonjuice/CynthiaWeb-dash/main/assets/png/cynthia.png",
+    "description": "Allows the use of :emoji: through CynthiaCMS.",
+    "author": "Strawmelonjuice"
+  },
+  {
+    "id": "hlimg",
+    "host": "NPM",
+    "referrer": "@cynthiacms/hlimg-cynthia",
+    "thumbnail": "https://raw.githubusercontent.com/strawmelonjuice/CynthiaWeb-dash/main/assets/png/cynthia.png",
+    "description": "Highlightable, resizable images through the HLIMG-package by Mar (Strawmelonjuice)",
+    "author": "Strawmelonjuice"
+  },
+  {
+    "id": "gfonts",
+    "host": "NPM",
+    "referrer": "@cynthiacms/gfonts",
+    "thumbnail": "https://raw.githubusercontent.com/strawmelonjuice/CynthiaWeb-dash/main/assets/png/cynthia.png",
+    "description": "Proxies google fonts, so that visitors of your website have their fonts directly from your server.",
+    "author": "Strawmelonjuice"
+  },
+  {
+    "id": "git-pull",
+    "host": "NPM",
+    "referrer": "@cynthiacms/git-pull",
+    "thumbnail": "https://raw.githubusercontent.com/strawmelonjuice/CynthiaWeb-dash/main/assets/png/cynthia.png",
+    "description": "Pulls from Git repositories to make sure the content on your site is always latest.",
+    "author": "Strawmelonjuice"
+  },
+  {
+    "id": "imgmotes",
+    "host": "NPM",
+    "referrer": "cynthia-imgmotes",
+    "thumbnail": "https://raw.githubusercontent.com/strawmelonjuice/CynthiaWeb-dash/main/assets/png/cynthia.png",
+    "description": "Allows special emotes made from images, meant for personal usage.",
+    "author": "Strawmelonjuice"
+  }
+]

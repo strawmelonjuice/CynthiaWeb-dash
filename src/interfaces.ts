@@ -21,6 +21,9 @@ export interface CynthiaPluginRepoItem {
     id: string,
     host: string,
     referrer: string,
+    author: string,
+    description: string,
+    thumbnail: string
 }
 
 export interface CynthiaPluginManifestItem {
