@@ -140,19 +140,20 @@ export function dashes(req: e.Request, res: e.Response) {
                             author: "Strawmelonjuice"
                         },
                     )
-                } else {
-                    console.log(`Fetching info about ${pl} from the index...`)
+                    continue
+                }
+                console.log(`Fetching info about ${pl} from the index... ${path.join(__dirname, `../../${pl}/package.json`)}`)
                     try {
                         const pida: Array<CynthiaPluginRepoItem> = (JSON.parse(fs.readFileSync(path.join(__dirname, "../generated/CynthiaPluginIndex.json"), "utf8")));
                         for (const p of pida) {
                             if (p.id === pl) {
-                                console.log("Match!")
+                                console.log("Match!");
                                 plugins.push({
                                     name: pl,
                                     description: p.description,
                                     version: (() => {
                                         try {
-                                            return JSON.parse(fs.readFileSync(path.join(__dirname, "../package.json"), "utf8")).version.toString();
+                                            return JSON.parse(fs.readFileSync(path.join(__dirname, `../../${p.id}/package.json`), "utf8")).version.toString();
                                         } catch (e) {
                                             return "Unknown";
                                         }
@@ -178,9 +179,8 @@ export function dashes(req: e.Request, res: e.Response) {
                             author: "Unknown",
                         })
                     }
-                }
             }
-            return hb.plugins({plugins});
+            return hb.plugins({ plugins, cynplmlocation: cynmploc });
             // return (Handlebars.compile(fs.readFileSync(
             //     path.join(__dirname, "../assets/handlebars/dashboard/plugins.handlebars"),
             //     "utf8",
