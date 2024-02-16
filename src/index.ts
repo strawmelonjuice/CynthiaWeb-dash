@@ -15,7 +15,8 @@ import * as page from "./page";
 import { authpage, secure } from "./access";
 import apis from "./apis";
 import session from "express-session";
-
+import { cynthiadashinterfaceapi } from "./cynthia-communicate";
+const cynthia = new cynthiadashinterfaceapi();
 const app = express();
 const sessionoptions: session.SessionOptions = {
 	secret: config.settings.session_secret,
@@ -65,11 +66,7 @@ switch (process.argv[2]) {
 			app.get("/dashboard-fetch/*", page.dashes);
 			app.post("/api/*", apis.post);
 			app.listen(config.settings.port, config.settings.address, () => {
-				tell.info(
-					`👋 Cynthia-Dash v${pkgself.version} is active! Visit ${chalk.green(
-						`http://${config.settings.address}:${config.settings.port}/`,
-					)} (or a custom adress if you have bound one) to access it!`,
-				);
+				tell.info(`👋 Cynthia-Dash v${pkgself.version} is active! Visit http://${config.settings.address}:${config.settings.port}/ (or a custom adress if you have bound one) to access it!`);
 			});
 		}
 		break;

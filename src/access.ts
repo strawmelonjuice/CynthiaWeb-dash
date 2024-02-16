@@ -6,7 +6,7 @@ import { tell, debuglog } from "./logging";
 import { Request } from "./interfaces";
 export function secure(page: string, session: Request["session"]) {
 	if (config.enabled) {
-		if (session.user_id != undefined) {
+		if (session.user_id !== undefined) {
 			return page;
 		}
 	} else {
@@ -34,11 +34,11 @@ export function authorization(c: { username: string; password: string }):
 				tell.log(
 					0,
 					"WebAUTH",
-					`Username \`${u.username}´ successfully logged in.`,
+					`User '${u.username}' successfully logged in.`,
 				);
 
 				return parseInt(n) + 1;
-			} else {
+			}
 				tell.log(
 					0,
 					"WebAUTH",
@@ -46,13 +46,12 @@ export function authorization(c: { username: string; password: string }):
 						c.password
 					}´ does not match ${((f) => {
 						if (config.production === false) return `\`${f}´`;
-						else return "the password";
+						return "the password";
 					})(u.password)}.`,
 				);
 				return false;
-			}
 		}
 	}
-	tell.log(0, "WebAUTH", `Username \`${c.username}´ does not exist.`);
+	tell.log(0, "WebAUTH", `Username '${c.username}' does not exist.`);
 	return false;
 }

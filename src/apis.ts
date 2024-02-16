@@ -14,15 +14,15 @@ export default {
         switch (req.params[0]) {
             case "signout":
                 // @ts-expect-error
-                if (req.session.user_id != undefined) {
+                if (req.session.user_id !== undefined) {
                     req.session.destroy((_) => {
                     });
                 }
                 return res.redirect("/");
-            case "GeneralSiteInfoPoll":
+            case "GeneralSiteInfoPoll": {
                 let displayname = ""
             //                @ts-expect-error
-                if (req.session.user_id != undefined) {
+                if (req.session.user_id !== undefined) {
                     //                @ts-expect-error
                     displayname = config.users[(req.session.user_id - 1)].displayname;
                 } else {
@@ -30,13 +30,13 @@ export default {
                 };
                 let username = ""
             //                @ts-expect-error
-                if (req.session.user_id != undefined) {
+                if (req.session.user_id !== undefined) {
                     //                @ts-expect-error
                     username = config.users[(req.session.user_id - 1)].username;
                 } else {
                     username = "unset"
                 };
-                if (username == undefined) username = "unset";
+                if (username === undefined) username = "unset";
                 return res.send(JSON.stringify({
                     displayname,
                         parentnodeadress:
@@ -45,6 +45,7 @@ export default {
                     }
                 ))
                     ;
+            }
         }
         return res.send(
             secure(
@@ -57,9 +58,9 @@ export default {
         res.type("json");
         res.set('Cache-Control', 'no-store')
         switch (req.params[0]) {
-            case "auth":
+            case "auth": {
                 // @ts-expect-error
-                if (req.session.user_id != undefined) {
+                if (req.session.user_id !== undefined) {
                     return res.send(JSON.stringify({Ok: true}));
                 }
                 const ok = authorization({
@@ -68,11 +69,15 @@ export default {
                 });
                 const OK = !(ok === false);
                 if (OK) {
+                    if (req.protocol === 'http' && config.production) {
+                        console.log("Unable to login? Set 'production' to false in 'config.json' if you use HTTP instead of HTTPS.")
+                    }
                     // @ts-expect-error
                     req.session.user_id = ok;
                 }
                 req.session.save();
                 return res.send(JSON.stringify({Ok: OK, re: ok}));
+            }
         }
     },
 };

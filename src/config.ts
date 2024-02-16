@@ -1,12 +1,36 @@
 import path from "path";
 import fs from "fs";
 import passwordgenerator from "generate-password";
-import tell from "./logging";
+import { configuration } from "./interfaces";
 
-let config = {
+
+
+let config: configuration = {
     enabled: true,
+    passkey: "// Do not change, this will be set automatically.",
     settings: {
-        port: 3001,
+        port: (() => {
+            if (fs.existsSync(path.join("../../.env"))) {
+                const t = fs.readFileSync(path.join("../../.env"), "utf8");
+                for (const line of t.split("\n")) {
+
+                    if (line.startsWith("#")) continue;
+                    if (line === "") continue;
+                    let p = false;
+
+                    for (const v of line.split("=")) {
+                        if (v === undefined || v === "") p = true;
+                    };
+
+                    if (p) continue;
+
+                    const key = (line.split("=")[0]).toUpperCase();
+                    if (key === "PORT") return parseInt(line.split("=")[1]) + 1;
+
+                }
+            }
+            return 3001;
+        })(),
         address: "localhost",
         verbose: false,
         session_secret: passwordgenerator.generate({
@@ -33,10 +57,10 @@ const configfile = path.join(__dirname, "../config.json");
 if (fs.existsSync(configfile)) {
     const t = fs.readFileSync(configfile, "utf8");
 
-    tell.info(
-        `config.json file found! Loading config${((a) => {
-            let b = JSON.parse(a);
-            if (b.verbose === true) return (": \n" + JSON.stringify(b));
+    console.info(
+        `[Cynthia-Dash] [INFO]         config.json file found! Loading config${((a) => {
+            const b = JSON.parse(a);
+            if (b.verbose === true) return (`: \n${JSON.stringify(b)}`);
             return "...";
         })(t)}`,
     );
@@ -45,4 +69,5 @@ if (fs.existsSync(configfile)) {
     console.log("No config.json file found. Generating a clean config...");
     fs.writeFileSync(configfile, JSON.stringify(config));
 }
+config.passkey = process.argv[3];
 export default config;

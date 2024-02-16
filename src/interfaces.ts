@@ -118,3 +118,24 @@ export interface PostListFilter {
     tag?: string,
     searchline?: string,
 }
+
+export interface configuration {
+    passkey: string;
+    enabled: boolean;
+    settings: {
+        port: number;
+        address: string;
+        verbose: boolean;
+        session_secret: string;
+        properties: {
+            homesite: string;
+        };
+    };
+    production: boolean;
+    users: Array<{
+        username: string;
+        displayname: string;
+        password: string;
+    }>;
+
+}

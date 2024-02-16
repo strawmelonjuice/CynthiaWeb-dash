@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 // import tslog from "tslog";
 import chalk from "chalk";
+import { cynthiadashinterfaceapi } from "./cynthia-communicate";
 
 const verbose = require("./config").verbose;
 const stripAnsiCodes = (str: string) =>
@@ -13,10 +14,14 @@ const stripAnsiCodes = (str: string) =>
 
 class logging {
     logfile: string;
+    connsola3: (logtype: string | number, msg: string) => void;
+    i: cynthiadashinterfaceapi;
 
     constructor(logfile: string) {
         this.logfile = logfile;
-        this.info(`🖊 Logging to "${logfilename}".`);
+        this.i = new cynthiadashinterfaceapi();
+        // this.info(`🖊 Logging to "${logfilename}".`);
+        this.connsola3 = this.i.sendlog;
     }
 
     logtofile(cat: string, msg: string) {
@@ -35,37 +40,68 @@ class logging {
             const numberofspaces = i - stripAnsiCodes(chalkednames).length;
             spaces = " ".repeat(numberofspaces);
         }
+
         console.log(chalkednames + spaces + message);
     }
 
     log(_errorlevel: number, name: string, content: string) {
-        this.logtofile(name, content);
-        this.connsola2(`[${name}]`, content);
+        try {
+            this.connsola3(1, `${name}: ${content}`);
+        }
+        catch (_e) {
+            this.logtofile(name, content);
+            this.connsola2(`[${name}]`, content);
+        }
     }
 
     warn(content: string) {
-        this.logtofile("WARN", content);
-        this.connsola2(`[${chalk.hex("#c25700")("WARN")}]`, content);
+        try {
+            this.connsola3(15, content);
+        }
+        catch (_e) {
+            this.logtofile("WARN", content);
+            this.connsola2(`[${chalk.hex("#c25700")("WARN")}]`, content);
+        }
     }
 
     error(content: string) {
-        this.logtofile("ERROR", content);
-        this.connsola2(`[${chalk.redBright("ERROR")}]`, chalk.bgBlack.red(content));
+        try {
+            this.connsola3(5, content);
+        }
+        catch (_e) {
+            this.logtofile("ERROR", content);
+            this.connsola2(`[${chalk.redBright("ERROR")}]`, chalk.bgBlack.red(content));
+        }
     }
 
     info(content: string) {
-        this.logtofile("INFO", content);
-        this.connsola2(`[${chalk.hex("#6699ff")("INFO")}]`, content);
+        try {
+            this.connsola3(10, content);
+        }
+        catch (_e) {
+            this.logtofile("INFO", content);
+            this.connsola2(`[${chalk.hex("#6699ff")("INFO")}]`, content);
+        }
     }
 
     silly(content: string) {
-        this.logtofile("SILLY", content);
-        this.connsola2(`[${chalk.white("SILLY :3")}]`, chalk.bgBlack.red(content));
+        try {
+            this.connsola3(88, content);
+        }
+        catch (_e) {
+            this.logtofile("SILLY", content);
+            this.connsola2(`[${chalk.white("SILLY :3")}]`, chalk.bgBlack.red(content));
+        }
     }
 
     fatal(content: string) {
-        this.logtofile("FATAL", content);
-        this.connsola2(`[${chalk.bgBlack.red("FATAL")}]`, content);
+        try {
+            this.connsola3(5000, content);
+        }
+        catch (_e) {
+            this.logtofile("FATAL", content);
+            this.connsola2(`[${chalk.bgBlack.red("FATAL")}]`, content);
+        }
     }
 }
 
@@ -94,6 +130,7 @@ export const tell = lt;
 if (verbose) {
     tell.info("Verbose logging is ON.");
 }
+// biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
 let _debuglog_;
 
 const debuglog_ = _debuglog_;
