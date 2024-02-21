@@ -2,21 +2,19 @@ import type { Response } from "express";
 import type * as c from "./interfaces";
 import path from "path";
 import fs from "fs";
-import chalk from "chalk";
 
 const pkgself = (() => {
 	const t = fs.readFileSync(path.join(__dirname, "../package.json"), "utf8");
 	return JSON.parse(t);
 })();
 import config from "./config";
-import { panic, tell } from "./logging";
+import tell from "./logging";
+import {panic} from "./logging";
 import express from "express";
 import * as page from "./page";
 import { authpage, secure } from "./access";
 import apis from "./apis";
 import session from "express-session";
-import { cynthiadashinterfaceapi } from "./cynthia-communicate";
-const cynthia = new cynthiadashinterfaceapi();
 const app = express();
 const sessionoptions: session.SessionOptions = {
 	secret: config.settings.session_secret,

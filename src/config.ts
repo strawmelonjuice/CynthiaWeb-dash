@@ -20,7 +20,7 @@ let config: configuration = {
 
                     for (const v of line.split("=")) {
                         if (v === undefined || v === "") p = true;
-                    };
+                    }
 
                     if (p) continue;
 

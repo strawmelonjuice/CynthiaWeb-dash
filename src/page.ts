@@ -11,7 +11,6 @@ import axios from "axios";
 
 
 export function home(req: e.Request, res: e.Response) {
-    logging.debuglog("Serving dashboard home page.");
     return res.send(
         secure(
             fs.readFileSync(

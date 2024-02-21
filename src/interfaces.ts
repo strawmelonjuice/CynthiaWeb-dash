@@ -8,6 +8,16 @@ export interface Request {
     session: SessionData;
 }
 
+export interface EngineEnvFile {
+	PORT: number;
+	STYLESHEET_CACHE_LIFETIME: number;
+	JAVASCRIPT_CACHE_LIFETIME: number;
+	EXTERNAL_CACHE_LIFETIME: number;
+	SERVED_CACHE_LIFETIME: number;
+
+	// biome-ignore lint/suspicious/noExplicitAny: lol no
+	[key: string]: any;
+}
 
 export type PublishedFileObject = Array<PostPageObject>;
 

@@ -2,7 +2,7 @@ import config from "./config";
 import path from "path";
 import fs from "fs";
 
-import { tell, debuglog } from "./logging";
+import tell from "./logging";
 import { Request } from "./interfaces";
 export function secure(page: string, session: Request["session"]) {
 	if (config.enabled) {
