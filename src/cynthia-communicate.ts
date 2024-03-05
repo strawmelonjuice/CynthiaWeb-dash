@@ -127,7 +127,13 @@ sendlog(logtype: string | number, msg: string): number | void {
 					l = 1;
 				} else {
 					console.error(response);
-					console.log("CynthiaDash could not log on CynthiaEngine instance.");
+					console.log(
+						`${"/".repeat(
+							30,
+						)}\n\rCynthiaDash could not log on CynthiaEngine instance.\n\n\rCurrently, Cynthia-Dash only seems to work on NodeJS v20 or later, and sporadically on Bun. The latter is being worked on.${"/".repeat(
+							30,
+						)}`,
+					);
 				}
 			});
 		if (logtype === 666) {
