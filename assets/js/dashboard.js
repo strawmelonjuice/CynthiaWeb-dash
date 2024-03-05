@@ -36,11 +36,20 @@ function switchpages(toPageName) {
 				}
 			},
 		},
+		addplugin: {
+			mobile: document.getElementById("mobile-plugins-nav"),
+			desktop: document.getElementById("plugins-nav"),
+			location: "addplugin",
+			navigator: false,
+		},
 		plugins: {
 			mobile: document.getElementById("mobile-plugins-nav"),
 			desktop: document.getElementById("plugins-nav"),
 			location: "plugins",
 			navigator: true,
+			f: () => {
+				document.getElementById("plugin-remove-cynthia-dash").remove();
+			}
 		},
 		customisation: {
 			mobile: document.getElementById("mobile-customisation-nav"),
@@ -67,10 +76,10 @@ function switchpages(toPageName) {
 			);
 			a.ariaCurrent = "page";
 			axios
-				.get("/dashboard-fetch/" + a.location)
-				.then(function (response) {
+				.get(`/dashboard-fetch/${a.location}`)
+				.then((response) => {
 					document.querySelector("main").innerHTML = response.data;
-					if (window.location.hash == "") window.location.hash = to;
+					if (window.location.hash === "") window.location.hash = to;
 					else {
 						window.location.hash = window.location.hash.replace(
 							window.location.hash.split("?")[0],
@@ -82,7 +91,7 @@ function switchpages(toPageName) {
 						a.f();
 					}
 				})
-				.catch(function (error) {
+				.catch((error) => {
 					document.querySelector("main").innerText =
 						"There was an error loading this page.";
 					console.error(error);
@@ -108,7 +117,7 @@ function hashIsolated() {
 	return window.location.hash.split("#")[1].split("?")[0];
 }
 
-setInterval(function () {
+setInterval(() => {
 	if (
 		window.displayedPage === undefined ||
 		hashIsolated() !== window.displayedPage
@@ -167,3 +176,23 @@ function LogOut() {
 	window.location.assign("/api/signout");
 }
 
+const c = {
+	plugins: {
+		remove: (plugin) => {
+			console.log(`${plugin} is being removed`);
+			axios
+				.post("/api/plugin.remove", {
+					plugin: plugin,
+				})
+				.then((response) => {
+					console.log(response.data);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+			setTimeout(() => {
+				switchpages("plugins")
+			}, 800);
+        },
+	}
+}

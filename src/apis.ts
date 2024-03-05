@@ -78,6 +78,10 @@ export default {
                 req.session.save();
                 return res.send(JSON.stringify({Ok: OK, re: ok}));
             }
+            case "plugin.remove": {
+                console.log("Removing plugin")
+                host.Cynthia.sendcommand("plugin", "remove", [req.body.plugin]);
+            }
         }
     },
 };

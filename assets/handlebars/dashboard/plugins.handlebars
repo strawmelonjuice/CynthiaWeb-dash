@@ -76,8 +76,11 @@
                 <div class="grid w-full">
                     <div class="grid ml-auto place-items-center justify-self-end end right-0">
                         <button
+                    alt="remove plugin"
+                    onclick="c.plugins.remove('{{this.name}}')"
                             class="hover:text-red-500 relative h-10 max-h-[40px] w-10 max-w-[90px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-blue-gray-500 transition-all hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                            type="button">
+                            type="button"
+                            id="plugin-remove-{{this.name}}">
                             <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                     class="w-5 h-5">
