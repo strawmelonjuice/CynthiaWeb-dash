@@ -22,16 +22,16 @@ function switchpages(toPageName) {
 			navigator: false,
 			f: () => {
 				const g = document.getElementById("whatamiediting");
-				if (getParams()["new"] !== undefined) {
+				if (getParams().new !== undefined) {
 					g.innerText = "Creating a new publication!";
 					return;
 				}
-				if (getParams()["id"] === undefined) {
+				if (getParams().id === undefined) {
 					g.innerText = "... with nothing open.";
 					return;
 				}
-				if (getParams()["id"] !== undefined) {
-					g.innerHTML = `Editing <i><b>${getParams()["id"]}</b></i>!`;
+				if (getParams().id !== undefined) {
+					g.innerHTML = `Editing <i><b>${getParams().id}</b></i>!`;
 					return;
 				}
 			},
